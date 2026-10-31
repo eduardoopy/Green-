@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Green</title>
+  <link rel="icon" type="image/png" href="assets/sprites/idle_1.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="palco">
+
+    <!-- Quadrado branco centralizado que contém o Green -->
+    <section class="cartao" id="cartao" aria-label="Green, seu companheiro virtual">
+
+      <!-- Balão de fala -->
+      <p class="balao" id="balao" role="status" aria-live="polite" hidden></p>
+
+      <!-- Personagem -->
+      <button class="personagem" id="personagem" type="button"
+              aria-label="Green. Clique para abrir o menu"
+              aria-expanded="false" aria-controls="menu">
+        <img id="sprite" src="assets/sprites/idle_1.png" alt="" width="256" height="256" draggable="false">
+      </button>
+      <div class="sombra-chao" aria-hidden="true"></div>
+
+      <!-- Menu de interação -->
+      <nav class="menu" id="menu" aria-label="Interações" hidden>
+        <button type="button" data-acao="conversar">Conversar</button>
+        <button type="button" data-acao="brincar">Brincar</button>
+        <button type="button" data-acao="alimentar">Alimentar</button>
+        <button type="button" data-acao="dormir">Dormir</button>
+        <button type="button" data-acao="configuracoes">Configurações</button>
+      </nav>
+
+      <!-- Painel de conversa (só aparece quando necessário) -->
+      <section class="painel" id="painel-conversa" aria-label="Conversa" hidden>
+        <ol class="mensagens" id="mensagens"></ol>
+        <form class="campo-mensagem" id="form-conversa" autocomplete="off">
+          <input type="text" id="entrada-mensagem" placeholder="Escreva para o Green" aria-label="Mensagem">
+          <button type="submit">Enviar</button>
+        </form>
+        <button type="button" class="fechar" data-fechar="painel-conversa" aria-label="Fechar conversa">×</button>
+      </section>
+
+      <!-- Painel de configurações (placeholder da Etapa 1) -->
+      <section class="painel" id="painel-configuracoes" aria-label="Configurações" hidden>
+        <p class="texto-painel">As configurações de necessidades, voz e memória ficam disponíveis nas próximas etapas.</p>
+        <button type="button" class="fechar" data-fechar="painel-configuracoes" aria-label="Fechar configurações">×</button>
+      </section>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

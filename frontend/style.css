@@ -1,0 +1,248 @@
+/* ==========================================================
+   GREEN — Etapa 1: interface minimalista
+   Paleta: branco, cinza e verde.
+   ========================================================== */
+
+:root {
+  --fundo: #f1f3f2;
+  --cartao: #ffffff;
+  --borda: #e2e6e4;
+  --texto: #2b3330;
+  --texto-suave: #7b8681;
+  --verde: #2ee66b;
+  --verde-escuro: #17a04a;
+  --verde-claro: #e9fbf0;
+  --sombra: 0 1px 2px rgba(30, 45, 38, .06), 0 12px 32px rgba(30, 45, 38, .08);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+[hidden] { display: none !important; }
+
+.palco {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* ---------- Quadrado branco ---------- */
+.cartao {
+  position: relative;
+  width: min(420px, 100%);
+  height: 560px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 28px;
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ---------- Balão de fala ---------- */
+.balao {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 64px);
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--verde-claro);
+  border: 1px solid #c4f0d4;
+  border-radius: 16px;
+  color: var(--verde-escuro);
+  font-weight: 600;
+  text-align: center;
+  z-index: 2;
+}
+.balao::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--verde-claro);
+  border-right: 1px solid #c4f0d4;
+  border-bottom: 1px solid #c4f0d4;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* ---------- Personagem ---------- */
+.personagem {
+  margin-top: 76px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 24px;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.personagem:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 4px;
+}
+.personagem img {
+  width: 256px;
+  height: 256px;
+  image-rendering: pixelated;   /* preserva a estética pixel art */
+  user-select: none;
+}
+
+.sombra-chao {
+  width: 120px;
+  height: 10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: rgba(30, 45, 38, .08);
+}
+
+/* ---------- Menu de interação ---------- */
+.menu {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  animation: entrar .16s ease-out;
+}
+.menu button {
+  padding: 9px 16px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  color: var(--texto);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+.menu button:hover {
+  background: var(--verde-claro);
+  border-color: var(--verde);
+}
+.menu button:focus-visible,
+.campo-mensagem button:focus-visible,
+.fechar:focus-visible,
+.campo-mensagem input:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 2px;
+}
+
+/* ---------- Painéis (conversa e configurações) ---------- */
+.painel {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  padding: 14px;
+  background: #f8faf9;
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  animation: entrar .16s ease-out;
+}
+.fechar {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--texto-suave);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.fechar:hover { background: var(--borda); }
+
+.texto-painel {
+  margin: 0;
+  padding-right: 24px;
+  color: var(--texto-suave);
+}
+
+.mensagens {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0 28px 0 0;
+  max-height: 84px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mensagens:empty { display: none; }
+.mensagens li {
+  max-width: 85%;
+  padding: 6px 12px;
+  border-radius: 14px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+}
+.mensagens li.usuario {
+  align-self: flex-end;
+  background: var(--verde-claro);
+  border-color: #c4f0d4;
+}
+
+.campo-mensagem {
+  display: flex;
+  gap: 8px;
+}
+.campo-mensagem input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 14px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--cartao);
+  color: var(--texto);
+  font: inherit;
+}
+.campo-mensagem button {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--verde-escuro);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.campo-mensagem button:hover { background: #128a3d; }
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu, .painel { animation: none; }
+}
+
+@media (max-width: 440px) {
+  .palco { padding: 12px; }
+  .cartao { height: 540px; }
+}
